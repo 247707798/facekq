@@ -3,7 +3,7 @@ package cn.edu.bucm.mapper;
 
 import org.springframework.stereotype.Component;
 @Component
-public class UserTongue {
+public class UserFace {
 
 
 
