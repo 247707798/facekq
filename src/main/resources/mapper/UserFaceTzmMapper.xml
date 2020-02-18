@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.bucm.mapper.UserFaceTzmMapper">
+    <select id="findUsersTzm"  resultType="cn.edu.bucm.mapper.UserFaceTzm">
+        select * from TONGUE_TZM
+    </select>
+
+    <select id="findUsersTzmByXgh" parameterType="java.lang.String" resultType="cn.edu.bucm.mapper.UserFaceTzm">
+        select * from TONGUE_TZM where  xgh=#{xgh}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(1) from TONGUE_TZM t
+        WHERE
+        <choose>
+            <when test="xgh != null and xgh != ''">
+                t.xgh like '%${xgh}%'
+            </when>
+            <otherwise>
+                1=1
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="insertUsersTzm" parameterType="cn.edu.bucm.mapper.UserFaceTzm">
+        insert into TONGUE_TZM(xgh,tzm) values(#{newuser.xgh}, #{newuser.tzm,jdbcType=CLOB})
+    </insert>
+
+    <insert id="updateUsersTzm" parameterType="cn.edu.bucm.mapper.UserFaceTzm">
+        update TONGUE_TZM set tzm=#{olduser.tzm,jdbcType=CLOB} where xgh=(#{olduser.xgh})
+    </insert>
+</mapper>
